@@ -1,0 +1,88 @@
+public class first_week_exs {
+	public static void main(String[] args) {
+		System.out.println("Select one exercise: ");
+		int N = Integer.parseInt(args[0]);
+		int M = Integer.parseInt(args[1]);
+		if (N == 1) {
+			factor(M);
+		}
+		else if(N == 2)
+			flips();
+		else
+			factor2(M);
+	}
+	static int get_power(int N, int i) {
+		int j = 0;
+		int power;
+		while (true){
+			power = (int) Math.pow(i, j);
+			if (N%power == 0) {
+				j++;
+				continue;
+			}
+			else
+				break;
+		}
+		return (j-1);
+	}
+	static boolean isprime(int i) {
+		for (int j = 2; j<=Math.sqrt(i); j++) {
+			if (i%j ==0)
+				return false;
+		}
+		return true;
+	}
+	static void factor(int N) {
+		String product = "";
+		for (int i = 2; i<= N/2; i++) {
+			if (N%i == 0 && isprime(i) == true) {
+				//Find the factors of N as well as its power
+				int m = get_power(N, i);
+				product += i;
+				if(m > 1) {
+					product += "^";
+					product += m;
+				}
+				product += "*";	
+			}
+		}
+		String result = "";
+		System.out.println("The standard form of factorizatoin: ");
+		for (int j = 0; j< product.length()-1; j++) {
+			result += product.charAt(j);
+		}
+		System.out.println(result);
+	}
+	
+	static void flips() {
+		double high = 50.0;
+		double low = 0.0;
+		double init = 25.0;
+		double flip;
+		int times = 0;
+		
+		
+		while (init >= low && init <= high) {
+			flip = Math.random();
+			if (flip >= 0.5) {
+				init += 0.7;
+			}
+			else
+				init -= 0.7;
+			
+			times++;
+		}
+		System.out.println("Total times for play: ");
+		System.out.println(times);
+	}
+	static void factor2(int N) {
+		System.out.println("The factors are: ");
+		String k = "1 ";
+		for (int i = 2; i<=N/2; i++) {
+			if (N%i == 0) {
+				k += i; 
+				k += " ";
+			}
+		}
+		System.out.print(k);
+	}
